@@ -5,7 +5,7 @@ DELIMITER //
 CREATE FUNCTION SafeDiv(a INT, b INT)
 RETURNS INT
 BEGIN
-    DECLARE result INT;
+    DECLARE result FLOAT;
 
     IF b = 0 THEN
         SET result = 0;
