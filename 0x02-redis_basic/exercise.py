@@ -16,7 +16,7 @@ class Cache:
     def store(self, data: Union[float, int, str, bytes]) -> str:
         """Stores data with key value through redis client instance
         as cache, returns key"""
-        obj_jey: uuid.UUID = uuid.uuid1()
+        obj_key: uuid.UUID = uuid.uuid1()
         self._redis.set(str(obj_key), data)
 
         return str(obj_key)
