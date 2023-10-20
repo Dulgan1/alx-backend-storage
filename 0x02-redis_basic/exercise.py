@@ -21,7 +21,8 @@ class Cache:
 
         return str(obj_key)
 
-    def get(self, key: str, fn: Callable) -> Union[float, int, str, bytes]:
+    def get(self, key: str, fn: Union[Callable, None] = None) \
+            -> Union[float, int, str, bytes]:
         """gets stored data with key as key,
         uses fn to convert data from bytes to any"""
         data = self._redis.get(key)
