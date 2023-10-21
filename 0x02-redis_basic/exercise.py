@@ -8,7 +8,7 @@ from typing import Union, Callable
 
 def call_history(method: Callable) -> Callable:
     """Decorator: saves call history of method"""
-    key_input = method.__qaulname__ + ':input'
+    key_input = method.__qualname__ + ':input'
     key_output = method.__qualname__ + ':output'
 
     @wraps(method)
