@@ -2,11 +2,20 @@
 """Cache module"""
 import redis
 import uuid
+from functool import wraps
 from typing import Union, Callable
 
 
 def count_calls(method: Callable) -> Callable:
-    pass
+    """Decorator: counts calls on method"""
+    key = method.__qualname__
+    @wraps(method)
+    def wrapper(self, *args, **kwargs):
+        """Function wrapper"""
+        self._redis.incr(key)
+        return method(*args, **kwargs)
+    return wrapper
+
 
 class Cache:
     """Caching system class"""
