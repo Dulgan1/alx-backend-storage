@@ -2,6 +2,7 @@
 """Web request caching: redis"""
 import requests
 import redis
+from typing import Callable
 
 redis_c = redis.Redis()
 
