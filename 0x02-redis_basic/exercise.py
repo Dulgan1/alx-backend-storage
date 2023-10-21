@@ -12,7 +12,7 @@ def call_history(method: Callable) -> Callable:
     key_output = method.__qualname__ + ':output'
 
     @wraps(method)
-    def wrapper(self, *args, *kwargs):
+    def wrapper(self, *args, **kwargs):
         """Stores call data: inout and output"""
         self._redis.rpush(key_input, str(args))
         out_data = method(self, *args, **kwargs)
