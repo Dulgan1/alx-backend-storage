@@ -9,6 +9,7 @@ from typing import Union, Callable
 def count_calls(method: Callable) -> Callable:
     """Decorator: counts calls on method"""
     key = method.__qualname__
+
     @wraps(method)
     def wrapper(self, *args, **kwargs):
         """Function wrapper"""
