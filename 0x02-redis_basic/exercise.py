@@ -2,7 +2,7 @@
 """Cache module"""
 import redis
 import uuid
-from functool import wraps
+from functools import wraps
 from typing import Union, Callable
 
 
