@@ -17,7 +17,9 @@ def keep_count(fn: Callable) -> Callable:
     return wrapper
 
 
-@keep_count
 def get_page(url: str) -> str:
     """Gets content of web page, caches count of webpage gets"""
+    key = 'count:' + url
+    redis_c.incr(key)
+    redis_c.expire(key, 10)
     return requests.get(url).text
