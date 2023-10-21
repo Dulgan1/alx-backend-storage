@@ -9,11 +9,11 @@ redis_c = redis.Redis()
 
 def keep_count(fn: Callable) -> Callable:
     """Caches count of fn function call"""
-    def wrapper(arg):
+    def wrapper(*arg, **kwargs):
         key = 'count:' + arg
         redis_c.incr(key)
         redis_c.expire(key, 10)
-        return fn(arg)
+        return fn(*arg, **kwargs)
     return wrapper
 
 
