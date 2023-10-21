@@ -3,7 +3,7 @@
 import requests
 import redis
 
-redis_c = Redis()
+redis_c = redis.Redis()
 
 
 def keep_count(fn: Callable) -> Callable:
@@ -14,6 +14,7 @@ def keep_count(fn: Callable) -> Callable:
         redis_c.expire(key, 10)
         return fn(arg)
     return wrapper
+
 
 @keep_count
 def get_page(url: str) -> str:
