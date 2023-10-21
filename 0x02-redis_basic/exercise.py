@@ -22,6 +22,7 @@ def call_history(method: Callable) -> Callable:
 
     return wrapper
 
+
 def count_calls(method: Callable) -> Callable:
     """Decorator: counts calls on method"""
     key = method.__qualname__
@@ -33,7 +34,9 @@ def count_calls(method: Callable) -> Callable:
         return method(self, *args, **kwargs)
     return wrapper
 
+
 def replay(method: Callable) -> None:
+    """Replay: display cached data"""
     key = method.__qualname__
     key_input = key + ':inputs'
     key_output = key + ':outputs'
@@ -48,7 +51,6 @@ def replay(method: Callable) -> None:
     for i, o in io_list:
         input, output = i.decode('UTF-8'), o.decode('UTF-8')
         print("{}(*{}) -> {}".format(key, input, output))
-
 
 
 class Cache:
