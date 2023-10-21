@@ -33,6 +33,23 @@ def count_calls(method: Callable) -> Callable:
         return method(self, *args, **kwargs)
     return wrapper
 
+def replay(method: Callable) -> None:
+    key = method.__qualname__
+    key_input = key + ':inputs'
+    key_output = key + ':outputs'
+    redis = method.__self__._redis
+    count = redis.get(key).decode('UTF-8')
+    input_list = redis.lrange(key_input, 0, -1)
+    output_list = redis.lrange(key_output, 0, -1)
+    io_list = list(zip(input_list, output_list))
+
+    print("{} was called {} times:".format(key, count))
+
+    for i, o in io_list:
+        input, output = i.decode('UTF-8'), o.decode('UTF-8')
+        print("{}(*{}) -> {}".format(key, input, output))
+
+
 
 class Cache:
     """Caching system class"""
