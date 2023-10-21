@@ -6,6 +6,7 @@ from typing import Union, Callable
 
 
 def count_calls(method: Callable) -> Callable:
+    pass
 
 class Cache:
     """Caching system class"""
